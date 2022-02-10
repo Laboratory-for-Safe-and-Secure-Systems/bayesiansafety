@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Defines the Event Tree presented in Unnikrishnan et al. 2014 
+"Application of Bayesian methods to event trees with case studies" Figure 10
+Outcome probabilities:
+
+Continue: 0.63
+Shutdown: 0.056525 + 0.24225 = 0.298775
+Overflow: 0.002975 + 0.0105 + 0.01275 + 0.045 = 0.071225
+-->
+<opsa-mef>
+  <define-initiating-event event-tree="Tank" name="HighLevel"/>
+  <define-event-tree name="Tank">
+    <define-functional-event name="Alarm"/>
+    <define-functional-event name="Operator"/>
+    <define-functional-event name="Transmitter"/>
+    <define-functional-event name="ESDV"/>
+    <define-sequence name="Continue"/>
+    <define-sequence name="Shutdown"/>
+    <define-sequence name="Overflow"/>
+    <initial-state>
+      <fork functional-event="Alarm">
+        <path state="yes">
+          <collect-expression>
+            <float value="0.7"/>
+          </collect-expression>
+          <fork functional-event="Operator">
+            <path state="success">
+              <collect-expression>
+                <float value="0.9"/>
+              </collect-expression>
+              <sequence name="Continue"/>
+            </path>
+            <path state="fails">
+              <collect-expression>
+                <float value="0.1"/>
+              </collect-expression>
+              <fork functional-event="Transmitter">
+                <path state="works">
+                  <collect-expression>
+                    <float value="0.85"/>
+                  </collect-expression>
+                  <fork functional-event="ESDV">
+                    <path state="acts">
+                      <collect-expression>
+                        <float value="0.95"/>
+                      </collect-expression>
+                      <sequence name="Shutdown"/>
+                    </path>
+                    <path state="fails">
+                      <collect-expression>
+                        <float value="0.05"/>
+                      </collect-expression>
+                      <sequence name="Overflow"/>
+                    </path>
+                  </fork>
+                </path>
+                <path state="fails">
+                  <collect-expression>
+                    <float value="0.15"/>
+                  </collect-expression>
+                  <sequence name="Overflow"/>
+                </path>
+              </fork>
+            </path>
+          </fork>
+        </path>
+        <path state="no">
+          <collect-expression>
+            <float value="0.3"/>
+          </collect-expression>
+          <fork functional-event="Transmitter">
+            <path state="works">
+              <collect-expression>
+                <float value="0.85"/>
+              </collect-expression>
+              <fork functional-event="ESDV">
+                <path state="acts">
+                  <collect-expression>
+                    <float value="0.95"/>
+                  </collect-expression>
+                  <sequence name="Shutdown"/>
+                </path>
+                <path state="fails">
+                  <collect-expression>
+                    <float value="0.05"/>
+                  </collect-expression>
+                  <sequence name="Overflow"/>
+                </path>
+              </fork>
+            </path>
+            <path state="fails">
+              <collect-expression>
+                <float value="0.15"/>
+              </collect-expression>
+              <sequence name="Overflow"/>
+            </path>
+          </fork>
+        </path>
+      </fork>
+    </initial-state>
+  </define-event-tree>
+</opsa-mef>

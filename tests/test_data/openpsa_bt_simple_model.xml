@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<!-- Defines the example Bow-Tie model from Maier and Mottok 2022.
+See xxxxxxx, section 2.2 
+OR_TLE serves as pivot node for linking both models -->
+<opsa-mef>
+	<define-fault-tree name="FaultTree">
+		<define-gate name="OR_TLE">
+			<label>OR_TLE</label>
+			<or>
+				<gate name="AND"/>
+				<gate name="OR_B4_5"/>
+			</or>
+		</define-gate>
+		<define-gate name="AND">
+			<label>AND</label>
+			<and>
+				<gate name="OR_B1_2"/>
+				<basic-event name="Basic_event_3"/>
+			</and>
+		</define-gate>
+		<define-gate name="OR_B4_5">
+			<label>OR_B4_5</label>
+			<or>
+				<basic-event name="Basic_event_4"/>
+				<basic-event name="Basic_event_5"/>
+			</or>
+		</define-gate>
+		<define-gate name="OR_B1_2">
+			<label>OR_B1_2</label>
+			<or>
+				<basic-event name="Basic_event_1"/>
+				<basic-event name="Basic_event_2"/>
+			</or>
+		</define-gate>
+	</define-fault-tree>
+
+	<define-initiating-event event-tree="EventTree" name="OR_TLE"/>
+
+	<define-event-tree name="EventTree">
+		<define-functional-event name="func_ev_1"/>
+		<define-functional-event name="func_ev_2"/>
+		<define-sequence name="c1"/>
+		<define-sequence name="c2"/>
+		<define-sequence name="c3"/>
+		<initial-state>
+			<fork functional-event="func_ev_1">
+				<path state="1a">
+					<collect-expression>
+						<float value="0.7"/>
+					</collect-expression>
+					<fork functional-event="func_ev_2">
+						<path state="2a">
+							<collect-expression>
+								<float value="0.35"/>
+							</collect-expression>
+							<sequence name="c1"/>
+						</path>
+						<path state="2b">
+							<collect-expression>
+								<float value="0.65"/>
+							</collect-expression>
+							<sequence name="c2"/>
+						</path>
+					</fork>
+				</path>
+				<path state="1b">
+					<collect-expression>
+						<float value="0.3"/>
+					</collect-expression>
+					<sequence name="c3"/>
+				</path>
+			</fork>
+		</initial-state>
+	</define-event-tree>
+	
+	<model-data>
+		<define-basic-event name="Basic_event_1">
+			<label>Basic_event_1</label>
+			<float value="1.2e-3"/>
+		</define-basic-event>
+		<define-basic-event name="Basic_event_2">
+			<label>Basic_event_2</label>
+			<float value="2.3e-4"/>
+		</define-basic-event>
+		<define-basic-event name="Basic_event_3">
+			<label>Basic_event_3</label>
+			<float value="3.4e-5"/>
+		</define-basic-event>
+		<define-basic-event name="Basic_event_4">
+			<label>Basic_event_4</label>
+			<float value="4.5e-6"/>
+		</define-basic-event>
+		<define-basic-event name="Basic_event_5">
+			<label>Basic_event_5</label>
+			<float value="5.6e-7"/>
+		</define-basic-event>
+	</model-data>
+</opsa-mef>

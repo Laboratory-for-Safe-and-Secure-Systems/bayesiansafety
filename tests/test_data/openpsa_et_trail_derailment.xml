@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<!-- Defines the example Event Tree from Bearfield and Marsh 2005 for the train derailment case study
+See https://doi.org/10.1007/11563228_5, section 4.1 -->
+<opsa-mef>
+	<define-event-tree name="TrainDerailment">
+		<define-functional-event name="contained"/>
+		<define-functional-event name="clear"/>
+		<define-functional-event name="cess_adj"/>
+		<define-functional-event name="falls"/>
+		<define-functional-event name="hits"/>
+		<define-functional-event name="collapse"/>
+		<define-functional-event name="collision"/>
+		<define-sequence name="d1"/>
+		<define-sequence name="d2"/>
+		<define-sequence name="d3"/>
+		<define-sequence name="d4"/>
+		<define-sequence name="d5"/>
+		<define-sequence name="d6"/>
+		<define-sequence name="d7"/>
+		<define-sequence name="d8"/>
+		<define-sequence name="d9"/>
+		<define-sequence name="d10"/>
+		<define-sequence name="d11"/>
+		<define-sequence name="d12"/>
+		<initial-state>
+			<fork functional-event="contained">
+				<path state="yes">
+					<collect-expression>
+						<float value="0.0"/>
+					</collect-expression>
+					<sequence name="d1"/>
+				</path>
+				<path state="no">
+					<collect-expression>
+						<float value="1.0"/>
+					</collect-expression>
+					<fork functional-event="clear">
+						<path state="yes">
+							<collect-expression>
+								<float value="0.29"/>
+							</collect-expression>
+							<sequence name="d2"/>
+						</path>
+						<path state="no">
+							<collect-expression>
+								<float value="0.71"/>
+							</collect-expression>
+							<fork functional-event="cess_adj">
+								<path state="cess">
+									<collect-expression>
+										<float value="0.125"/>
+									</collect-expression>
+									<fork functional-event="falls">
+										<path state="yes">
+											<collect-expression>
+												<float value="0.05"/>
+											</collect-expression>
+											<fork functional-event="hits">
+												<path state="yes">
+													<collect-expression>
+														<float value="0.25"/>
+													</collect-expression>
+													<fork functional-event="collapse">
+														<path state="yes">
+															<collect-expression>
+																<float value="0.05"/>
+															</collect-expression>
+															<sequence name="d8"/>
+														</path>
+														<path state="no">
+															<collect-expression>
+																<float value="0.95"/>
+															</collect-expression>
+															<sequence name="d7"/>
+														</path>
+													</fork>
+												</path>
+												<path state="no">
+													<collect-expression>
+														<float value="0.75"/>
+													</collect-expression>
+													<sequence name="d6"/>
+												</path>
+											</fork>
+										</path>
+										<path state="no">
+											<collect-expression>
+												<float value="0.95"/>
+											</collect-expression>
+											<fork functional-event="hits">
+												<path state="yes">
+													<collect-expression>
+														<float value="0.20"/>
+													</collect-expression>
+													<fork functional-event="collapse">
+														<path state="yes">
+															<collect-expression>
+																<float value="0.05"/>
+															</collect-expression>
+															<sequence name="d5"/>
+														</path>
+														<path state="no">
+															<collect-expression>
+																<float value="0.95"/>
+															</collect-expression>
+															<sequence name="d4"/>
+														</path>
+													</fork>
+												</path>
+												<path state="no">
+													<collect-expression>
+														<float value="0.80"/>
+													</collect-expression>
+													<sequence name="d3"/>
+												</path>
+											</fork>
+										</path>
+									</fork>
+								</path>
+								<path state="adj">
+									<collect-expression>
+										<float value="0.875"/>
+									</collect-expression>
+									<fork functional-event="falls">
+										<path state="yes">
+											<collect-expression>
+												<float value="0.05"/>
+											</collect-expression>
+											<fork functional-event="collision">
+												<path state="yes">
+													<collect-expression>
+														<float value="0.10"/>
+													</collect-expression>
+													<sequence name="d12"/>
+												</path>
+												<path state="no">
+													<collect-expression>
+														<float value="0.90"/>
+													</collect-expression>
+													<sequence name="d11"/>
+												</path>
+											</fork>
+										</path>
+										<path state="no">
+											<collect-expression>
+												<float value="0.95"/>
+											</collect-expression>
+											<fork functional-event="collision">
+												<path state="yes">
+													<collect-expression>
+														<float value="0.10"/>
+													</collect-expression>
+													<sequence name="d10"/>
+												</path>
+												<path state="no">
+													<collect-expression>
+														<float value="0.90"/>
+													</collect-expression>
+													<sequence name="d9"/>
+												</path>
+											</fork>
+										</path>
+									</fork>
+								</path>
+							</fork>
+						</path>
+					</fork>
+				</path>
+			</fork>
+		</initial-state>
+	</define-event-tree>
+</opsa-mef>

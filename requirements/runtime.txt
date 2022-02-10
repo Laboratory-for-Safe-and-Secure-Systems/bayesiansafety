@@ -1,0 +1,7 @@
+numpy
+matplotlib
+networkx
+tqdm
+joblib
+pgmpy >= 0.1.18
+pyagrum >= 1.1.1

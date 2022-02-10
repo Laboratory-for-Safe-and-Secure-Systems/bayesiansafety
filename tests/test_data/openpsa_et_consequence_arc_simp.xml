@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Defines the example Event Tree from Bearfield and Marsh 2005 for consequence arc simplification.
+See https://doi.org/10.1007/11563228_5, section 3.3 -->
+<opsa-mef>
+  <define-event-tree name="ConsequenceArcSimplification">
+    <define-functional-event name="e1"/>
+    <define-functional-event name="e2"/>
+    <define-sequence name="c1"/>
+    <define-sequence name="c2"/>
+    <initial-state>
+      <fork functional-event="e1">
+        <path state="e11">
+          <collect-expression>
+            <float value="0.7"/>
+          </collect-expression>
+          <fork functional-event="e2">
+            <path state="e21">
+              <collect-expression>
+                <float value="0.01"/>
+              </collect-expression>
+              <sequence name="c1"/>
+            </path>
+            <path state="e22">
+              <collect-expression>
+                <float value="0.99"/>
+              </collect-expression>
+              <sequence name="c2"/>
+            </path>
+          </fork>
+        </path>
+        <path state="e12">
+          <collect-expression>
+            <float value="0.3"/>
+          </collect-expression>
+          <fork functional-event="e2">
+            <path state="e21">
+              <collect-expression>
+                <float value="0.1"/>
+              </collect-expression>
+              <sequence name="c1"/>
+            </path>
+            <path state="e22">
+              <collect-expression>
+                <float value="0.9"/>
+              </collect-expression>
+              <sequence name="c2"/>
+            </path>
+          </fork>
+        </path>
+      </fork>
+    </initial-state>
+  </define-event-tree>
+</opsa-mef>

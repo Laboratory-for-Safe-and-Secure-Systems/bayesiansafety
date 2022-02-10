@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Defines the a simple Fault Tree with all currently supported gate-types -->
+<opsa-mef>
+  <define-fault-tree name="GateTest">
+    <define-gate name="AND">
+      <label>AND</label>
+      <and>
+        <gate name="OR_1"/>
+        <gate name="OR_2"/>
+      </and>
+    </define-gate>
+    <define-gate name="OR_1">
+      <label>OR_1</label>
+      <or>
+        <basic-event name="Basic_event_1_1"/>
+        <basic-event name="Basic_event_1_2"/>
+      </or>
+    </define-gate>
+    <define-gate name="OR_2">
+      <label>OR_2</label>
+      <or>
+        <basic-event name="Basic_event_2_1"/>
+        <basic-event name="Basic_event_2_2"/>
+      </or>
+    </define-gate>
+  </define-fault-tree>
+  
+  <model-data>
+    <define-basic-event name="Basic_event_1_1">
+      <label>Basic_event_1_1</label>
+      <float value="1.23e-4"/>
+    </define-basic-event>
+    <define-basic-event name="Basic_event_1_2">
+      <label>Basic_event_1_2</label>
+      <float value="5.67e-8"/>
+    </define-basic-event>
+    <define-basic-event name="Basic_event_2_1">
+      <label>Basic_event_2_1</label>
+      <float value="4.32e-1"/>
+    </define-basic-event>
+    <define-basic-event name="Basic_event_2_2">
+      <label>Basic_event_2_2</label>
+      <float value="9.76e-5"/>
+    </define-basic-event>
+  </model-data>
+</opsa-mef>

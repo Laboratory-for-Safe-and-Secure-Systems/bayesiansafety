@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Defines the "elevator model" from "Fehlerbaumanalyse in Theorie und Praxis"
+F. Edler and M.Soden and R.Hankammer (2015) p.126 / 127 (ISBN: 978-3-662-48165-3) -->
+<opsa-mef>
+  <define-fault-tree name="Elevator">
+    <define-gate name="AND_TOP">
+      <label>AND_TOP</label>
+      <and>
+        <gate name="OR_SIG_HI"/>
+        <gate name="OR_SIG_LO"/>
+      </and>
+    </define-gate>
+    <define-gate name="OR_SIG_HI">
+      <label>OR_SIG_HI</label>
+      <or>
+        <basic-event name="IHF_SIG_HI_FP"/>
+        <basic-event name="EMI_SIG_HI_FP"/>
+        <basic-event name="OR_LOG"/>
+      </or>
+    </define-gate>
+    <define-gate name="OR_SIG_LO">
+      <label>OR_SIG_LO</label>
+      <or>
+        <basic-event name="IHF_SIG_LO_FP"/>
+        <basic-event name="EMI_SIG_LO_FP"/>
+        <basic-event name="OR_LOG"/>
+      </or>
+    </define-gate>
+    <define-gate name="OR_LOG">
+      <label>OR_LOG</label>
+      <or>
+        <basic-event name="IHF_LOG_FA"/>
+        <basic-event name="EMI_LOG_FA"/>
+        <basic-event name="SYS_LOG_FA"/>
+        <basic-event name="AND_LS_BS_SIG"/>
+      </or>
+    </define-gate>
+    <define-gate name="AND_LS_BS_SIG">
+      <label>AND_LS_BS_SIG</label>
+      <and>
+        <gate name="OR_LS_SIG"/>
+        <gate name="OR_BS_SIG"/>
+      </and>
+    </define-gate>
+    <define-gate name="OR_LS_SIG">
+      <label>OR_LS_SIG</label>
+      <or>
+        <basic-event name="IHF_SIG_LS_FP"/>
+        <basic-event name="EMI_SIG_LS_FP"/>
+        <basic-event name="OR_LS"/>
+      </or>
+    </define-gate>
+    <define-gate name="OR_BS_SIG">
+      <label>OR_BS_SIG</label>
+      <or>
+        <basic-event name="IHF_SIG_BS_FP"/>
+        <basic-event name="EMI_SIG_BS_FP"/>
+        <basic-event name="OR_BS"/>
+      </or>
+    </define-gate>
+    <define-gate name="OR_LS">
+      <label>OR_LS</label>
+      <or>
+        <basic-event name="IHF_LS_FP"/>
+        <basic-event name="EMI_LS_FP"/>
+      </or>
+    </define-gate>
+    <define-gate name="OR_BS">
+      <label>OR_BS</label>
+      <or>
+        <basic-event name="IHF_BS_FP"/>
+        <basic-event name="EMI_BS_FP"/>
+      </or>
+    </define-gate>
+  </define-fault-tree>
+  
+  <model-data>
+    <define-basic-event name="EMI_BS_FP">
+      <label>EMI_BS_FP</label>
+      <float value="2.78e-7"/>
+    </define-basic-event>
+    <define-basic-event name="EMI_LOG_FA">
+      <label>EMI_LOG_FA</label>
+      <float value="2.78e-7"/>
+    </define-basic-event>
+    <define-basic-event name="EMI_LS_FP">
+      <label>EMI_LS_FP</label>
+      <float value="2.78e-7"/>
+    </define-basic-event>
+    <define-basic-event name="EMI_SIG_BS_FP">
+      <label>EMI_SIG_BS_FP</label>
+      <float value="2.78e-7"/>
+    </define-basic-event>
+    <define-basic-event name="EMI_SIG_HI_FP">
+      <label>EMI_SIG_HI_FP</label>
+      <float value="2.78e-7"/>
+    </define-basic-event>
+    <define-basic-event name="EMI_SIG_LO_FP">
+      <label>EMI_SIG_LO_FP</label>
+      <float value="2.78e-7"/>
+    </define-basic-event>
+    <define-basic-event name="EMI_SIG_LS_FP">
+      <label>EMI_SIG_LS_FP</label>
+      <float value="2.78e-7"/>
+    </define-basic-event>
+    <define-basic-event name="SYS_LOG_FA">
+      <label>SYS_LOG_FA</label>
+      <float value="0.0"/>
+    </define-basic-event>
+
+    <!-- Time dependent nodes -->
+
+    <define-basic-event name="IHF_BS_FP">
+      <exponential>
+        <parameter name="lambda_IHF_BS_FP"/>
+        <system-mission-time/>
+      </exponential>
+    </define-basic-event>
+    <define-parameter name="lambda_IHF_BS_FP">
+      <float value="1.998e-3"/>
+    </define-parameter>
+    <define-basic-event name="IHF_LOG_FA">
+      <exponential>
+        <parameter name="lambda_IHF_LOG_FA"/>
+        <system-mission-time/>
+      </exponential>
+    </define-basic-event>
+    <define-parameter name="lambda_IHF_LOG_FA">
+      <float value="1.199e-3"/>
+    </define-parameter>
+    <define-basic-event name="IHF_LS_FP">
+      <exponential>
+        <parameter name="lambda_IHF_LS_FP"/>
+        <system-mission-time/>
+      </exponential>
+    </define-basic-event>
+    <define-parameter name="lambda_IHF_LS_FP">
+      <float value="7.997e-4"/>
+    </define-parameter>
+    <define-basic-event name="IHF_SIG_BS_FP">
+      <exponential>
+        <parameter name="lambda_IHF_SIG_BS_FP"/>
+        <system-mission-time/>
+      </exponential>
+    </define-basic-event>
+    <define-parameter name="lambda_IHF_SIG_BS_FP">
+      <float value="9.95e-3"/>
+    </define-parameter>
+    <define-basic-event name="IHF_SIG_HI_FP">
+      <exponential>
+        <parameter name="lambda_IHF_SIG_HI_FP"/>
+        <system-mission-time/>
+      </exponential>
+    </define-basic-event>
+    <define-parameter name="lambda_IHF_SIG_HI_FP">
+      <float value="1e-5"/>
+    </define-parameter>
+    <define-basic-event name="IHF_SIG_LO_FP">
+      <exponential>
+        <parameter name="lambda_IHF_SIG_LO_FP"/>
+        <system-mission-time/>
+      </exponential>
+    </define-basic-event>
+    <define-parameter name="lambda_IHF_SIG_LO_FP">
+      <float value="1e-5"/>
+    </define-parameter>
+    <define-basic-event name="IHF_SIG_LS_FP">
+      <exponential>
+        <parameter name="lambda_IHF_SIG_LS_FP"/>
+        <system-mission-time/>
+      </exponential>
+    </define-basic-event>
+    <define-parameter name="lambda_IHF_SIG_LS_FP">
+      <float value="1e-5"/>
+    </define-parameter>
+  </model-data>
+</opsa-mef>

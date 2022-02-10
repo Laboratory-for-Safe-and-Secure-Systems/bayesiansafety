@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Defines the a simple Fault Tree with time dependent basic events.
+Currently only "exponential" time behaviour is supported. -->
+<opsa-mef>
+  <define-fault-tree name="TimeDependencyTest">
+    <define-gate name="AND">
+      <label>AND</label>
+      <and>
+        <gate name="OR_1"/>
+        <gate name="OR_2"/>
+      </and>
+    </define-gate>
+    <define-gate name="OR_1">
+      <label>OR_1</label>
+      <or>
+        <basic-event name="Basic_event_1_1"/>
+        <basic-event name="Basic_event_1_2"/>
+      </or>
+    </define-gate>
+    <define-gate name="OR_2">
+      <label>OR_2</label>
+      <or>
+        <basic-event name="Time_basic_event_2_1"/>
+        <basic-event name="Time_basic_event_2_2"/>
+      </or>
+    </define-gate>
+  </define-fault-tree>
+  
+  <model-data>
+    <define-basic-event name="Basic_event_1_1">
+      <label>Basic_event_1_1</label>
+      <float value="1.23e-4"/>
+    </define-basic-event>
+    <define-basic-event name="Basic_event_1_2">
+      <label>Basic_event_1_2</label>
+      <float value="5.67e-8"/>
+    </define-basic-event>
+    <!-- Time dependent nodes -->
+    <define-basic-event name="Time_basic_event_2_1">
+      <exponential>
+        <parameter name="lambda_basic_event_2_1"/>
+        <system-mission-time/>
+      </exponential>
+    </define-basic-event>
+    <define-parameter name="lambda_basic_event_2_1">
+      <float value="1.23e-4"/>
+    </define-parameter>
+    <define-basic-event name="Time_basic_event_2_2">
+      <exponential>
+        <parameter name="lambda_basic_event_2_2"/>
+        <system-mission-time/>
+      </exponential>
+    </define-basic-event>
+    <define-parameter name="lambda_basic_event_2_2">
+      <float value="5.67e-8"/>
+    </define-parameter>
+  </model-data>
+</opsa-mef>

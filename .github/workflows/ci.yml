@@ -1,0 +1,30 @@
+name: bayesiansafety
+
+on:
+  push:
+    branches: [ "main" ]
+jobs:
+  build:
+    name: Running tests - OS - ${{ matrix.os }}; Python - ${{ matrix.python-version}}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        python-version: [3.9]
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m pip install pytest
+        python -m pip install -r requirements.txt -U
+    - name: Execute tests
+      run: pytest --cov-config .coveragerc --cov-report html:./reports --cov-report term --cov=bayesiansafety --verbose --cov-branch --junitxml ./reports/junit_report.xml
+      
+    - name: After success
+      run: codecov

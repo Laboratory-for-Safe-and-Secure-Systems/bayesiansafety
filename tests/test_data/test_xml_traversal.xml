@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Test traversal of an xml tree -->
+<level-0>
+  <level-1 name="le-1">
+    <level-2-a name="le-2-a"/>
+    <level-2-b name="le-2-b"/>
+    <level-2-c>
+      <level-3 name="le-3">
+        <level-4-a name="le-4-a">
+          <level-5-a value="1.0"/>
+        </level-4-a>
+        <level-4-b name="le-4-b">
+          <level-5-b value="2.0"/>
+        </level-4-b>
+      </level-3>
+    </level-2-c>
+  </level-1>
+</level-0>
