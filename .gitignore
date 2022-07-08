@@ -5,7 +5,7 @@
 ### Custom
 Code/BayesianSafety/[Rr]eports
 Code/BayesianSafety/[Vv]env
-[Dd]ocu/
+[Dd]ocumentation/
 [Pp]lots/
 *.png
 *.jpeg
@@ -514,7 +514,7 @@ instance/
 .scrapy
 
 # Sphinx documentation
-docs/_build/
+_build/
 
 # PyBuilder
 .pybuilder/
@@ -1048,9 +1048,6 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
-
-# pkgdown site
-docs/
 
 # translation temp files
 po/*~

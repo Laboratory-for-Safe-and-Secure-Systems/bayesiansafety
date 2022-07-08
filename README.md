@@ -35,11 +35,13 @@ pip install -U Sphinx
 pip install sphinx-rtd-theme
 ```
 
-Then go to the "docs" directory and simply build the documentation via
+Then go to the "docs" directory and build the documentation via
 
 ```
 make html
 ```
+
+Go to ./docs/documentation/html and open index.html in a browser of your choice.
 
 ## Citation:
 If you are using bayesiansafety in your work, please cite as:
