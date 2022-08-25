@@ -45,9 +45,20 @@ Go to ./docs/documentation/html and open index.html in a browser of your choice.
 
 ## Citation:
 If you are using bayesiansafety in your work, please cite as:
-(Details will be available September 2022)
-
-Maier R., Mottok J. (2022) BayesianSafety - an Open-Source package for Causality-Guided, Multi-Model Safety Analysis. In:  xxx (eds) Computer Safety, Reliability, and Security. SAFECOMP 2022. Lecture Notes in Computer Science(), vol xxx. Springer, Cham. https://doi.org/xxxx
+```
+@InProceedings{10.1007/978-3-031-14835-4_2,
+  author="Maier, Robert and Mottok, J{\"u}rgen",
+  editor="Trapp, Mario and Saglietti, Francesca and Spisl{\"a}nder, Marc and Bitsch, Friedemann",
+  title="BayesianSafety - An Open-Source Package for Causality-Guided, Multi-model Safety Analysis",
+  booktitle="Computer Safety, Reliability, and Security",
+  year="2022",
+  publisher="Springer International Publishing",
+  address="Cham",
+  pages="17--30",
+  isbn="978-3-031-14835-4",
+  doi={10.1007/978-3-031-14835-4_2}
+}
+```
 
 
 ## Implemented features:
